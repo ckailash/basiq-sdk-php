@@ -2,7 +2,8 @@
 
 namespace Basiq\Entities;
 
-class Transaction extends Entity {
+class Transaction extends Entity
+{
 
     public $id;
     public $status;
@@ -30,5 +31,4 @@ class Transaction extends Entity {
         $this->postDate = $data["postDate"];
         $this->transactionDate = $data["transactionDate"];
     }
-
 }

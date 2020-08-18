@@ -2,7 +2,8 @@
 
 namespace Basiq\Exceptions;
 
-class HttpResponseException extends \Exception {
+class HttpResponseException extends \Exception
+{
 
     public $response;
     public $statusCode;
@@ -22,6 +23,4 @@ class HttpResponseException extends \Exception {
         $this->statusCode = $statusCode;
         $this->message = $error;
     }
-
-
 }

@@ -4,7 +4,8 @@ namespace Basiq\Entities;
 
 use Basiq\Utilities\ResponseParser;
 
-class TransactionList extends Entity {
+class TransactionList extends Entity
+{
 
     public $data;
     public $links;
@@ -24,16 +25,16 @@ class TransactionList extends Entity {
             return false;
         }
 
-        $next = substr($this->links["next"], strpos($this->links["next"], ".io/")+4);
+        $next = substr($this->links["next"], strpos($this->links["next"], ".io/") + 4);
 
         if ($this->limit !== null) {
-            $next .= "&limit=".$this->limit;
+            $next .= "&limit=" . $this->limit;
         }
 
         $response = $this->session->apiClient->get($next, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -42,7 +43,7 @@ class TransactionList extends Entity {
         $this->data = $body["data"];
         $this->links = $body["links"];
 
-        return true;     
+        return true;
     }
 
     private function parseData($data)

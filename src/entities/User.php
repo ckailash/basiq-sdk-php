@@ -2,10 +2,11 @@
 
 namespace Basiq\Entities;
 
-use \Basiq\Services\UserService;
-use \Basiq\Services\ConnectionService;
+use Basiq\Services\UserService;
+use Basiq\Services\ConnectionService;
 
-class User extends Entity {
+class User extends Entity
+{
 
     public $email;
     public $mobile;

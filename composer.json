@@ -3,6 +3,9 @@
     "require": {
         "guzzlehttp/guzzle": "~6.0"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    },
     "description": "PHP SDK for Basiq.io API",
     "keywords": ["basiq","finance","api","sdk"],
     "homepage": "https://github.com/basiqio/basiq-sdk-php",

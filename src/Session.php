@@ -6,7 +6,8 @@ use GuzzleHttp\Client;
 use Basiq\Utilities\ResponseParser;
 use Basiq\Services\UserService;
 
-class Session {
+class Session
+{
 
     private $apiKey;
 
@@ -16,11 +17,12 @@ class Session {
 
     private $sessionTimestamp;
 
-    private $tokenValidity; 
+    private $tokenValidity;
     
     private $apiVersion;
 
-    public function __construct($apiKey, $apiVersion="1.0") {
+    public function __construct($apiKey, $apiVersion = "1.0")
+    {
         $this->apiClient = new Client([
             // Base URI is used with relative requests
             'base_uri' => 'http://au-api.basiq.io',
@@ -38,7 +40,8 @@ class Session {
         $this->accessToken = $this->getAccessToken();
     }
 
-    public function getApiVersion() {
+    public function getApiVersion()
+    {
         return $this->apiVersion;
     }
  
@@ -55,7 +58,7 @@ class Session {
         $response = $this->apiClient->post("/token", [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Basic ".$this->apiKey,
+                "Authorization" => "Basic " . $this->apiKey,
                 "basiq-version" => $this->apiVersion
             ]
         ]);
@@ -74,7 +77,7 @@ class Session {
     {
         $response = $this->apiClient->get("/institutions", [
             "headers" => [
-                "Authorization" => "Bearer ".$this->getAccessToken()
+                "Authorization" => "Bearer " . $this->getAccessToken()
             ]
         ]);
 
@@ -85,7 +88,7 @@ class Session {
     {
         $response = $this->apiClient->get("/institutions/" . $id, [
             "headers" => [
-                "Authorization" => "Bearer ".$this->getAccessToken()
+                "Authorization" => "Bearer " . $this->getAccessToken()
             ]
         ]);
 
@@ -101,5 +104,4 @@ class Session {
     {
         return (new UserService($this))->forUser($id);
     }
-
 }

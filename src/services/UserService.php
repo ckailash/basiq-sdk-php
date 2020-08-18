@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Basiq\Services;
 
@@ -14,9 +14,11 @@ use Basiq\Entities\Connection;
 use Basiq\Utilities\ResponseParser;
 use Basiq\Utilities\FilterBuilder;
 
-class UserService extends Service {
+class UserService extends Service
+{
 
-    public function create($data = []) {
+    public function create($data = [])
+    {
         if (!isset($data["email"]) && !isset($data["mobile"])) {
             throw new \InvalidArgumentException("No valid parameters provided");
         }
@@ -28,7 +30,7 @@ class UserService extends Service {
         $response = $this->session->apiClient->post("/users", [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ],
             "json" => $data
         ]);
@@ -36,24 +38,27 @@ class UserService extends Service {
         return (new User($this, ResponseParser::parse($response)));
     }
 
-    public function forUser($id) {
+    public function forUser($id)
+    {
         return (new User($this, [
             "id" => $id
         ]));
     }
 
-    public function get($id) {
+    public function get($id)
+    {
         $response = $this->session->apiClient->get("/users/" . $id, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
         return (new User($this, ResponseParser::parse($response)));
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         if (!isset($id)) {
             throw new \InvalidArgumentException("No id provided");
         }
@@ -69,14 +74,15 @@ class UserService extends Service {
         $response = $this->session->apiClient->post("/users/" . $id, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ],
             "json" => $data
         ]);
         return (new User($this, ResponseParser::parse($response)));
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         if (!isset($id)) {
             throw new \InvalidArgumentException("No id provided");
         }
@@ -84,7 +90,7 @@ class UserService extends Service {
         $response = $this->session->apiClient->delete("/users/" . $id, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -96,7 +102,7 @@ class UserService extends Service {
         $url = "/users/" . $userId . "/accounts";
 
         if ($accountId !== null) {
-            $url .= "/". $accountId;
+            $url .= "/" . $accountId;
         }
 
         if ($filter !== null) {
@@ -106,7 +112,7 @@ class UserService extends Service {
         $response = $this->session->apiClient->get($url, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -126,7 +132,7 @@ class UserService extends Service {
         $url = "/users/" . $userId . "/transactions";
 
         if ($transactionId !== null) {
-            $url .= "/". $transactionId;
+            $url .= "/" . $transactionId;
         }
 
         if ($filter !== null || $limit !== null) {
@@ -145,13 +151,13 @@ class UserService extends Service {
             if ($limit > 500) {
                 throw new \Exception("Limit must be a number less than or equal to 500");
             }
-            $url .= "limit=".$limit;
+            $url .= "limit=" . $limit;
         }
 
         $response = $this->session->apiClient->get($url, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -169,7 +175,7 @@ class UserService extends Service {
         $response = $this->session->apiClient->post("users/" . $userId . "/connections/refresh", [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -192,7 +198,7 @@ class UserService extends Service {
         $response = $this->session->apiClient->get($url, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 

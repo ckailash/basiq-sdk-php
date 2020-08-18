@@ -6,8 +6,8 @@ use Basiq\Entities\Connection;
 use Basiq\Entities\Job;
 use Basiq\Utilities\ResponseParser;
 
-
-class ConnectionService extends Service {
+class ConnectionService extends Service
+{
 
     protected $user;
 
@@ -17,7 +17,8 @@ class ConnectionService extends Service {
         $this->user = $user;
     }
 
-    public function create($data = []) {
+    public function create($data = [])
+    {
         if (!isset($data["institutionId"]) || !isset($data["loginId"]) || !isset($data["password"])) {
             throw new \InvalidArgumentException("Invalid parameters provided");
         }
@@ -34,7 +35,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->post("users/" . $this->user->id . "/connections", [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ],
             "json" => $data
         ]);
@@ -44,7 +45,8 @@ class ConnectionService extends Service {
         return (new Job($this, $body));
     }
 
-    public function update($connectionId, $password) {
+    public function update($connectionId, $password)
+    {
         if (!isset($password)) {
             throw new \InvalidArgumentException("Invalid parameters provided");
         }
@@ -52,7 +54,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->post("users/" . $this->user->id . "/connections/" . $connectionId, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ],
             "json" => ["password" => $password]
         ]);
@@ -67,7 +69,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->get("users/" . $this->user->id . "/connections/"  . $connectionId, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -81,7 +83,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->get("jobs/" . $jobId, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -95,7 +97,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->post("users/" . $this->user->id . "/connections/" . $connectionId . "/refresh", [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -109,7 +111,7 @@ class ConnectionService extends Service {
         $response = $this->session->apiClient->delete("users/" . $this->user->id . "/connections/" . $connectionId, [
             "headers" => [
                 "Content-type" => "application/json",
-                "Authorization" => "Bearer ".$this->session->getAccessToken()
+                "Authorization" => "Bearer " . $this->session->getAccessToken()
             ]
         ]);
 
@@ -118,7 +120,8 @@ class ConnectionService extends Service {
         return null;
     }
 
-    public function forConnection($id) {
+    public function forConnection($id)
+    {
         return (new Connection($this, $this->user, [
             "id" => $id
         ]));

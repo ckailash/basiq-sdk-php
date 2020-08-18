@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Basiq\Services;
 
-class Service {
+class Service
+{
 
     public $session;
 
@@ -10,5 +11,4 @@ class Service {
     {
         $this->session = $session;
     }
-
 }

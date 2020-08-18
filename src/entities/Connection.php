@@ -4,7 +4,8 @@ namespace Basiq\Entities;
 
 use Basiq\Services\ConnectionService;
 
-class Connection extends Entity {
+class Connection extends Entity
+{
 
     private $service;
     private $user;
